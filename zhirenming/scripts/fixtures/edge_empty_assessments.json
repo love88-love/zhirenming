@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "3f6b2a1c-7d4e-4f5a-9b8c-1d2e3f4a5b6c",
+  "profile_type": "other",
+  "subject": {
+    "alias": "阿晨",
+    "role": "romantic",
+    "context_note": "朋友介绍认识两个月"
+  },
+  "dimensions": {
+    "big_five": {
+      "openness": {
+        "assessments": []
+      },
+      "conscientiousness": {
+        "assessments": []
+      },
+      "extraversion": {
+        "assessments": []
+      },
+      "agreeableness": {
+        "assessments": []
+      },
+      "neuroticism": {
+        "assessments": []
+      }
+    },
+    "attachment": {
+      "assessments": []
+    },
+    "communication_style": {
+      "assessments": []
+    },
+    "lifestyle_rhythm": {
+      "assessments": []
+    },
+    "values": {
+      "assessments": []
+    }
+  },
+  "created_at": "2026-09-20T10:00:00+08:00",
+  "updated_at": "2026-10-09T14:32:07+08:00"
+}

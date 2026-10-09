@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 620" font-family="'Noto Sans SC', sans-serif">
+  <rect width="680" height="620" fill="#FAF9F7"/>
+  <rect x="40" y="36" width="600" height="548" rx="12" fill="#FFFFFF" stroke="#E7E5E4"/>
+
+  <rect x="72" y="68" width="10" height="34" rx="4" fill="#D97706"/>
+  <text x="94" y="86" font-size="22" font-weight="590" fill="#1C1917">你 × 阿晨 · 相处参考</text>
+  <text x="94" y="106" font-size="12" fill="#A8A29E" font-family="'JetBrains Mono', monospace">基于两份画像的当前快照 · 无分数，只有相对性</text>
+
+  <!-- 相似 -->
+  <text x="72" y="140" font-size="15" font-weight="590" fill="#15803D">相似 · 你们同频的地方</text>
+  <rect x="72" y="152" width="536" height="58" rx="8" fill="#F5F4F2"/>
+  <text x="88" y="175" font-size="13" fill="#1C1917">都习惯把事先想清楚再开口——讨论节奏合拍，</text>
+  <text x="88" y="193" font-size="13" fill="#1C1917">但 brainstorm 时可能互相等对方先说话。</text>
+
+  <!-- 互补 -->
+  <text x="72" y="244" font-size="15" font-weight="590" fill="#047857">互补 · 能互相补位的地方</text>
+  <rect x="72" y="256" width="536" height="58" rx="8" fill="#F5F4F2"/>
+  <text x="88" y="279" font-size="13" fill="#1C1917">你盯全局方向，他抠交付细节。方案评审时搭着来，</text>
+  <text x="88" y="297" font-size="13" fill="#1C1917">大概率比单干都稳。</text>
+
+  <!-- 冲突 -->
+  <text x="72" y="348" font-size="15" font-weight="590" fill="#B91C1C">摩擦 · 需要留神的地方</text>
+  <rect x="72" y="360" width="536" height="58" rx="8" fill="#F5F4F2"/>
+  <text x="88" y="383" font-size="13" fill="#1C1917">你压力大会说出来，他压力大会沉默。他沉默时，</text>
+  <text x="88" y="401" font-size="13" fill="#1C1917">大概率不是疏远，是在自己消化——别追着问。</text>
+
+  <!-- N4 收束块 -->
+  <text x="340" y="452" font-size="13" fill="#78716C" text-anchor="middle">──────── 关于这份报告 ────────</text>
+  <text x="340" y="478" font-size="12" fill="#78716C" text-anchor="middle">它描述的是当前画像下的你们：两个会变化的人，在此刻的相处参考。</text>
+  <text x="340" y="498" font-size="12" fill="#78716C" text-anchor="middle">它不是分数，更不是判决书。合不合适，没有工具能替你们回答。</text>
+  <text x="340" y="518" font-size="12" fill="#78716C" text-anchor="middle">报告能帮你们看清差异和节奏；怎么相处、走多远，答案在真实的相处里。</text>
+  <text x="340" y="538" font-size="12" fill="#78716C" text-anchor="middle">带着自己的判断用它——也随时可以推翻它。</text>
+
+  <text x="608" y="570" font-size="11" fill="#A8A29E" text-anchor="end">知人明 · AI 辅助参考，真实了解来自真实相处</text>
+</svg>

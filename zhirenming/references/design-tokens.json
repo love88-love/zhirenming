@@ -1,0 +1,131 @@
+{
+  "$meta": {
+    "product": "知人明",
+    "version": "1.0.0",
+    "date": "2026-10-09",
+    "source": "docs/UIUX.md §4.3 + docs/SPEC.md §8",
+    "register": "brand",
+    "axes": { "DESIGN_VARIANCE": 5, "MOTION_INTENSITY": 2, "VISUAL_DENSITY": 3 },
+    "notes": "暖墨纸感 + 单点琥珀。人格色系已排除紫粉区间。全部颜色必须经 Token 引用，禁止裸 hex（#fff/#000 除外）。"
+  },
+  "color": {
+    "bg":               { "value": "#FAF9F7", "type": "color", "tier": "A1", "comment": "暖白纸感底色，温度靠质感不靠色温" },
+    "surface":          { "value": "#FFFFFF", "type": "color", "tier": "A1", "comment": "卡片主体" },
+    "fg":               { "value": "#1C1917", "type": "color", "tier": "A1", "comment": "暖黑墨色，不用纯黑" },
+    "muted":            { "value": "#78716C", "type": "color", "tier": "A1", "comment": "暖灰，次级信息" },
+    "accent":           { "value": "#D97706", "type": "color", "tier": "A1", "comment": "琥珀，单点强调，每卡≤2处" },
+    "border":           { "value": "#E7E5E4", "type": "color", "tier": "A1" },
+    "fg2":              { "value": "#44403C", "type": "color", "tier": "B-slot", "aliasOf": "fg", "comment": "次级正文" },
+    "meta":             { "value": "#A8A29E", "type": "color", "tier": "B-slot", "comment": "三级元信息/署名" },
+    "surfaceWarm":      { "value": "#F5F4F2", "type": "color", "tier": "B-slot", "comment": "证据区/引用区浅底，中性暖灰非奶油" },
+    "borderSoft":       { "value": "#F0EFED", "type": "color", "tier": "B-slot", "comment": "卡内行分隔细线" },
+    "accentOn":         { "value": "#FFFFFF", "type": "color", "tier": "A2", "comment": "accent 底上的前景" },
+    "accentHover":      { "value": "#B45309", "type": "color", "tier": "A2" },
+    "accentActive":     { "value": "#92400E", "type": "color", "tier": "A2" },
+    "accentWash":       { "value": "#FDF6EC", "type": "color", "tier": "B-slot", "comment": "琥珀极浅底，仅关键结论词衬底" },
+    "confidenceHigh":   { "value": "#15803D", "type": "color", "tier": "A2", "comment": "置信度·高=基本能确定" },
+    "confidenceMid":    { "value": "#B45309", "type": "color", "tier": "A2", "comment": "置信度·中=大概率" },
+    "confidenceLow":    { "value": "#A8A29E", "type": "color", "tier": "A2", "comment": "置信度·低=只有苗头，故意显得不确定" },
+    "conflict":         { "value": "#B91C1C", "type": "color", "tier": "A2", "comment": "冲突点标记，克制使用，每卡≤1处" },
+    "success":          { "value": "#15803D", "type": "color", "tier": "A2", "aliasOf": "confidenceHigh" },
+    "warn":             { "value": "#B45309", "type": "color", "tier": "A2", "aliasOf": "confidenceMid" },
+    "danger":           { "value": "#B91C1C", "type": "color", "tier": "A2", "aliasOf": "conflict" }
+  },
+  "persona": {
+    "comment": "C-extension 人格色系——由画像主维度派生，作卡片色块标记。五色均已排除紫→粉区间；靛蓝为纯色使用（合规）。每色三档：base=色块/标记，deep=该色系上的正文，wash=极浅衬底。",
+    "amber": {
+      "base":  { "value": "#D97706", "type": "color" },
+      "deep":  { "value": "#92400E", "type": "color" },
+      "wash":  { "value": "#FDF6EC", "type": "color" },
+      "maps":  "外向性/能量感主导"
+    },
+    "pine": {
+      "base":  { "value": "#047857", "type": "color" },
+      "deep":  { "value": "#065F46", "type": "color" },
+      "wash":  { "value": "#EBF4F0", "type": "color" },
+      "maps":  "宜人性/稳定感主导（松绿）"
+    },
+    "indigo": {
+      "base":  { "value": "#4F46E5", "type": "color" },
+      "deep":  { "value": "#3730A3", "type": "color" },
+      "wash":  { "value": "#EFEFFA", "type": "color" },
+      "maps":  "开放性/思辨感主导（靛蓝，纯色使用，禁止与粉/紫渐变）"
+    },
+    "ochre": {
+      "base":  { "value": "#9A3412", "type": "color" },
+      "deep":  { "value": "#7C2D12", "type": "color" },
+      "wash":  { "value": "#FAF0EA", "type": "color" },
+      "maps":  "尽责性/笃定感主导（赭红，土调红棕，非正红）"
+    },
+    "graphite": {
+      "base":  { "value": "#44403C", "type": "color" },
+      "deep":  { "value": "#292524", "type": "color" },
+      "wash":  { "value": "#F0EFEE", "type": "color" },
+      "maps":  "神经质低/内敛主导或证据不足时的默认中性（石墨）"
+    }
+  },
+  "font": {
+    "display": { "value": "\"Smiley Sans\", \"Noto Sans SC\", sans-serif", "type": "fontFamily", "tier": "A1", "comment": "得意黑，卡片大标题/关键结论词" },
+    "body":    { "value": "\"Noto Sans SC\", sans-serif", "type": "fontFamily", "tier": "A1" },
+    "mono":    { "value": "\"JetBrains Mono\", monospace", "type": "fontFamily", "tier": "A2", "comment": "仅置信度标记、证据编号、日期等档案感细节" },
+    "size": {
+      "xs":   { "value": "12px", "type": "dimension", "comment": "置信度小字/署名/N5提示行" },
+      "sm":   { "value": "13px", "type": "dimension", "comment": "证据来源行" },
+      "base": { "value": "15px", "type": "dimension", "comment": "卡片正文" },
+      "lg":   { "value": "18px", "type": "dimension", "comment": "卡内小标题" },
+      "xl":   { "value": "22px", "type": "dimension", "comment": "区块标题" },
+      "2xl":  { "value": "28px", "type": "dimension", "comment": "次级结论" },
+      "3xl":  { "value": "36px", "type": "dimension", "comment": "核心结论（≥卡宽1/6，缩略图可读）" },
+      "4xl":  { "value": "44px", "type": "dimension", "comment": "仅自我画像卡人格关键词" }
+    },
+    "weight": {
+      "regular":  { "value": 400, "type": "fontWeight" },
+      "medium":   { "value": 510, "type": "fontWeight" },
+      "semibold": { "value": 590, "type": "fontWeight" }
+    },
+    "leading": {
+      "body":    { "value": "1.6", "type": "number" },
+      "tight":   { "value": "1.25", "type": "number" },
+      "display": { "value": "1.15", "type": "number" }
+    },
+    "tracking": {
+      "caps":    { "value": "0.08em", "type": "dimension", "comment": "全大写/小标签（如 CONFIDENCE）" },
+      "display": { "value": "-0.01em", "type": "dimension" }
+    }
+  },
+  "space": {
+    "1":  { "value": "4px", "type": "dimension" },
+    "2":  { "value": "8px", "type": "dimension" },
+    "3":  { "value": "12px", "type": "dimension" },
+    "4":  { "value": "16px", "type": "dimension" },
+    "5":  { "value": "20px", "type": "dimension" },
+    "6":  { "value": "24px", "type": "dimension", "comment": "卡内信息区块间距" },
+    "8":  { "value": "32px", "type": "dimension", "comment": "卡内边距" },
+    "10": { "value": "40px", "type": "dimension" },
+    "12": { "value": "48px", "type": "dimension" },
+    "16": { "value": "64px", "type": "dimension" }
+  },
+  "radius": {
+    "sm":   { "value": "4px", "type": "dimension", "comment": "Badge/色块标记" },
+    "md":   { "value": "8px", "type": "dimension", "comment": "证据区/引用块" },
+    "lg":   { "value": "12px", "type": "dimension", "comment": "卡片上限，禁止更大" },
+    "full": { "value": "9999px", "type": "dimension", "comment": "仅置信度胶囊标签" }
+  },
+  "elevation": {
+    "flat":   { "value": "none", "type": "boxShadow", "comment": "默认，印刷感走边框不走阴影" },
+    "ring":   { "value": "0 0 0 1px #E7E5E4", "type": "boxShadow", "comment": "卡片默认层级" },
+    "raised": { "value": "0 1px 2px rgba(28,25,23,0.04), 0 4px 12px rgba(28,25,23,0.06)", "type": "boxShadow", "comment": "仅悬浮/叠放场景" }
+  },
+  "motion": {
+    "fast": { "value": "150ms", "type": "duration" },
+    "base": { "value": "200ms", "type": "duration" },
+    "ease": { "value": "cubic-bezier(0.2, 0, 0, 1)", "type": "cubicBezier" },
+    "comment": "MOTION_INTENSITY=2：分享图为静态，对话无动效；仅保留状态过渡收敛值，须支持 prefers-reduced-motion"
+  },
+  "layout": {
+    "cardWidth":   { "value": "750px", "type": "dimension", "comment": "分享卡标准宽度（朋友圈信息流 2x 渲染）" },
+    "cardPadding": { "value": "32px", "type": "dimension" },
+    "blockGap":    { "value": "24px", "type": "dimension" },
+    "iconSize":    { "value": ["16px", "20px", "24px"], "type": "dimension", "comment": "Lucide 三档，不混用其他图标库" }
+  }
+}

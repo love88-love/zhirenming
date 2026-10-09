@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZhibiProfile",
+  "type": "object",
+  "required": ["schema_version", "profile_id", "profile_type", "subject", "dimensions", "created_at", "updated_at"],
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^1\\." },
+    "profile_id": { "type": "string", "format": "uuid" },
+    "profile_type": { "enum": ["self", "other"] },
+    "subject": {
+      "type": "object",
+      "required": ["alias"],
+      "properties": {
+        "alias": { "type": "string", "description": "用户给的称呼，严禁真实姓名必填" },
+        "role": { "enum": ["friend", "colleague", "leader", "romantic", "family", "other"], "description": "profile_type=other 时必填" },
+        "context_note": { "type": "string", "description": "关系背景一句话，如'同部门半年'" }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["big_five", "attachment", "communication_style", "lifestyle_rhythm", "values"],
+      "properties": {
+        "big_five": {
+          "type": "object",
+          "required": ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"],
+          "properties": {
+            "openness":          { "$ref": "#/definitions/dimension" },
+            "conscientiousness": { "$ref": "#/definitions/dimension" },
+            "extraversion":      { "$ref": "#/definitions/dimension" },
+            "agreeableness":     { "$ref": "#/definitions/dimension" },
+            "neuroticism":       { "$ref": "#/definitions/dimension" }
+          }
+        },
+        "attachment":          { "$ref": "#/definitions/dimension" },
+        "communication_style": { "$ref": "#/definitions/dimension" },
+        "lifestyle_rhythm":    { "$ref": "#/definitions/dimension" },
+        "values":              { "$ref": "#/definitions/dimension" }
+      }
+    },
+    "revision_history": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/assessment" },
+      "description": "被推翻的推断归档于此，活跃维度区只保留 active"
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "profile_type": { "const": "other" } } },
+      "then": { "properties": { "subject": { "required": ["alias", "role"] } } },
+      "description": "profile_type=other 时 subject.role 条件必填（机器强制，原 description 注明升级为契约）"
+    }
+  ],
+  "definitions": {
+    "dimension": {
+      "type": "object",
+      "required": ["assessments"],
+      "properties": {
+        "assessments": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/assessment" }
+        }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "required": ["id", "claim", "confidence", "evidence", "status", "created_at"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^a_[0-9]{3,}$" },
+        "claim": {
+          "type": "string",
+          "description": "具体、可证伪的行为断言。禁止'有时外向有时内向'式巴纳姆句"
+        },
+        "tendency": {
+          "enum": ["high", "medium", "low", "unclear"],
+          "description": "该推断指向的维度倾向；unclear 用于记录'证据矛盾'这一事实本身"
+        },
+        "confidence": {
+          "enum": ["high", "medium", "low"],
+          "description": "校准规则见 dimensions.md 置信度校准表"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["quote", "source", "date"],
+            "properties": {
+              "quote": { "type": "string", "description": "用户原话或事件描述原文，不得改写" },
+              "source": { "enum": ["user_report", "user_observation", "chat_record", "self_report"] },
+              "date": { "type": "string", "format": "date" }
+            }
+          }
+        },
+        "status": { "enum": ["active", "revised"] },
+        "superseded_by": { "type": "string", "description": "status=revised 时指向新推断 id" },
+        "revision_reason": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

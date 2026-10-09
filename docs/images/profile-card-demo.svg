@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 560" font-family="'Noto Sans SC', sans-serif">
+  <rect width="680" height="560" fill="#FAF9F7"/>
+  <rect x="40" y="36" width="600" height="488" rx="12" fill="#FFFFFF" stroke="#E7E5E4"/>
+
+  <!-- 头部：化名 + 关系 -->
+  <rect x="72" y="68" width="10" height="34" rx="4" fill="#D97706"/>
+  <text x="94" y="86" font-size="22" font-weight="590" fill="#1C1917">阿晨的画像</text>
+  <text x="94" y="106" font-size="12" fill="#A8A29E" font-family="'JetBrains Mono', monospace">同事 · 6 条线索 · 更新于 2026-10-09</text>
+
+  <!-- 推断 1：high -->
+  <rect x="72" y="130" width="536" height="86" rx="8" fill="#F5F4F2"/>
+  <rect x="88" y="144" width="76" height="20" rx="10" fill="#15803D"/>
+  <text x="126" y="158" font-size="11" fill="#FFFFFF" text-anchor="middle">基本能确定</text>
+  <text x="176" y="159" font-size="14" fill="#1C1917">多人会议不抢第一个发言，散会后一对一补观点</text>
+  <text x="88" y="188" font-size="12" fill="#78716C">依据：「他开会从来不第一个发言，但散会后总会单独找主讲人聊两句」</text>
+  <text x="88" y="204" font-size="11" fill="#A8A29E" font-family="'JetBrains Mono', monospace">user_observation · 2026-10-08　＋1 条转述</text>
+
+  <!-- 推断 2：medium -->
+  <rect x="72" y="230" width="536" height="66" rx="8" fill="#F5F4F2"/>
+  <rect x="88" y="244" width="56" height="20" rx="10" fill="#B45309"/>
+  <text x="116" y="258" font-size="11" fill="#FFFFFF" text-anchor="middle">大概率</text>
+  <text x="156" y="259" font-size="14" fill="#1C1917">对截止时间敏感，习惯提前一天交付</text>
+  <text x="88" y="282" font-size="12" fill="#78716C">依据：「上次联调他提前一天就把接口文档发群里了」</text>
+
+  <!-- 推断 3：low -->
+  <rect x="72" y="310" width="536" height="66" rx="8" fill="#F5F4F2"/>
+  <rect x="88" y="324" width="64" height="20" rx="10" fill="#A8A29E"/>
+  <text x="120" y="338" font-size="11" fill="#FFFFFF" text-anchor="middle">只有苗头</text>
+  <text x="164" y="339" font-size="14" fill="#1C1917">压力大了会沉默，不太主动求助</text>
+  <text x="88" y="362" font-size="12" fill="#78716C">依据：「上季度末那周他话明显变少」——先记着，有新线索随时改</text>
+
+  <!-- N2 提示行 -->
+  <text x="72" y="412" font-size="13" fill="#78716C">以上是当前线索下的参考画像，不是定论——真人永远比画像立体。</text>
+
+  <line x1="72" y1="436" x2="608" y2="436" stroke="#F0EFED"/>
+
+  <!-- 伦理标注 -->
+  <text x="72" y="462" font-size="12" fill="#78716C">每条推断都带证据原文与置信度；证据不足的维度留空，不编造。</text>
+  <text x="72" y="482" font-size="12" fill="#78716C">被推翻的旧推断进修订记录，随时可以翻。</text>
+
+  <!-- N5 署名 -->
+  <text x="608" y="510" font-size="11" fill="#A8A29E" text-anchor="end">知人明 · AI 辅助参考，真实了解来自真实相处</text>
+</svg>

@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "3f6b2a1c-7d4e-4f5a-9b8c-1d2e3f4a5b6c",
+  "profile_type": "other",
+  "subject": {
+    "alias": "阿晨",
+    "context_note": "朋友介绍认识两个月"
+  },
+  "dimensions": {
+    "big_five": {
+      "openness": {
+        "assessments": [
+          {
+            "id": "a_001",
+            "claim": "周末宁愿去看小众展也不去热门打卡点，最近三次出游都是自己找的非主流目的地",
+            "tendency": "high",
+            "confidence": "high",
+            "evidence": [
+              {
+                "quote": "他上周又一个人跑去郊区看一个陶艺展，回来讲了两个小时",
+                "source": "user_observation",
+                "date": "2026-10-05"
+              },
+              {
+                "quote": "他说过'人多的地方我反而没劲'",
+                "source": "user_report",
+                "date": "2026-09-28"
+              }
+            ],
+            "status": "active",
+            "created_at": "2026-10-05T21:10:00+08:00"
+          },
+          {
+            "id": "a_002",
+            "claim": "聊天里会主动聊新看的纪录片，频率大约每周一次",
+            "tendency": "high",
+            "confidence": "medium",
+            "evidence": [
+              {
+                "quote": "他昨晚发了个纪录片链接说'这个你肯定没看过'",
+                "source": "chat_record",
+                "date": "2026-10-07"
+              }
+            ],
+            "status": "active",
+            "created_at": "2026-10-07T23:02:00+08:00"
+          }
+        ]
+      },
+      "conscientiousness": {
+        "assessments": []
+      },
+      "extraversion": {
+        "assessments": [
+          {
+            "id": "a_003",
+            "claim": "聚会上话不多，上次六人饭局他主动开口不超过五次",
+            "tendency": "low",
+            "confidence": "low",
+            "evidence": [
+              {
+                "quote": "那次饭局他基本在听，就插了几句",
+                "source": "user_report",
+                "date": "2026-09-30"
+              }
+            ],
+            "status": "active",
+            "created_at": "2026-09-30T22:40:00+08:00"
+          }
+        ]
+      },
+      "agreeableness": {
+        "assessments": [
+          {
+            "id": "a_004",
+            "claim": "服务员上错菜他会先笑着说没事，两次外出就餐都如此",
+            "tendency": "high",
+            "confidence": "medium",
+            "evidence": [
+              {
+                "quote": "上次上错鱼他说'没事这个也挺好'",
+                "source": "user_observation",
+                "date": "2026-09-20"
+              },
+              {
+                "quote": "这周咖啡店做错口味他也是笑笑说换了就行",
+                "source": "user_observation",
+                "date": "2026-10-06"
+              }
+            ],
+            "status": "active",
+            "created_at": "2026-10-06T20:15:00+08:00"
+          }
+        ]
+      },
+      "neuroticism": {
+        "assessments": []
+      }
+    },
+    "attachment": {
+      "assessments": [
+        {
+          "id": "a_005",
+          "claim": "吵架后会主动约时间把话说开，两次争执都是他先提出'我们聊聊'",
+          "tendency": "high",
+          "confidence": "high",
+          "evidence": [
+            {
+              "quote": "上周闹别扭，第二天他发消息说'晚上我们聊聊吧，憋着难受'",
+              "source": "chat_record",
+              "date": "2026-10-02"
+            },
+            {
+              "quote": "上个月那次也是他先开口说要把话说清楚",
+              "source": "user_report",
+              "date": "2026-09-10"
+            }
+          ],
+          "status": "active",
+          "created_at": "2026-10-02T22:00:00+08:00"
+        }
+      ]
+    },
+    "communication_style": {
+      "assessments": [
+        {
+          "id": "a_006",
+          "claim": "回复消息偏慢，工作日白天经常隔三四个小时才回",
+          "tendency": "low",
+          "confidence": "low",
+          "evidence": [
+            {
+              "quote": "他上班的时候回消息是真的慢",
+              "source": "user_report",
+              "date": "2026-10-03"
+            }
+          ],
+          "status": "active",
+          "created_at": "2026-10-03T18:30:00+08:00"
+        }
+      ]
+    },
+    "lifestyle_rhythm": {
+      "assessments": []
+    },
+    "values": {
+      "assessments": [
+        {
+          "id": "a_007",
+          "claim": "明确说过不接受异地，认为感情必须建立在日常相处上",
+          "tendency": "high",
+          "confidence": "high",
+          "evidence": [
+            {
+              "quote": "他说'异地我谈不了，感情就是要天天见面处出来的'",
+              "source": "user_report",
+              "date": "2026-09-25"
+            },
+            {
+              "quote": "聊到朋友异地分手，他说'所以我坚决不异地'",
+              "source": "user_report",
+              "date": "2026-10-04"
+            }
+          ],
+          "status": "active",
+          "created_at": "2026-10-04T21:45:00+08:00"
+        }
+      ]
+    }
+  },
+  "created_at": "2026-09-20T10:00:00+08:00",
+  "updated_at": "2026-10-09T14:32:07+08:00"
+}

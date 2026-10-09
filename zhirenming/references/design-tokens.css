@@ -1,0 +1,130 @@
+/* ============================================================
+   知人明 · Design Tokens v1.0.0
+   来源：docs/UIUX.md §4.3 + docs/SPEC.md §8
+   寄存器：品牌型（卡片即传播物料）｜ 三轴：V5 / M2 / D3
+   规则：颜色全部经 Token 引用；卡片圆角 ≤ 12px；
+        人格色系已排除紫→粉区间；每卡强调色 ≤ 2 处。
+   ============================================================ */
+
+:root {
+  /* ---- A1 Identity：基底 ---- */
+  --bg: #FAF9F7;            /* 暖白纸感 */
+  --surface: #FFFFFF;
+  --fg: #1C1917;            /* 暖黑墨色，不用纯黑 */
+  --muted: #78716C;
+  --accent: #D97706;        /* 琥珀，单点强调 */
+  --border: #E7E5E4;
+
+  /* ---- B-slot 别名 ---- */
+  --fg-2: #44403C;
+  --meta: #A8A29E;
+  --surface-warm: #F5F4F2;  /* 证据区浅底 */
+  --border-soft: #F0EFED;   /* 卡内行分隔 */
+  --accent-wash: #FDF6EC;
+
+  /* ---- A2 语义 ---- */
+  --accent-on: #FFFFFF;
+  --accent-hover: #B45309;
+  --accent-active: #92400E;
+
+  --confidence-high: #15803D;  /* 基本能确定 */
+  --confidence-mid: #B45309;   /* 大概率 */
+  --confidence-low: #A8A29E;   /* 只有苗头 */
+  --conflict: #B91C1C;         /* 冲突点，克制使用 */
+
+  --success: var(--confidence-high);
+  --warn: var(--confidence-mid);
+  --danger: var(--conflict);
+
+  /* ---- C-extension 人格色系（base / deep / wash 三档） ---- */
+  --persona-amber: #D97706;
+  --persona-amber-deep: #92400E;
+  --persona-amber-wash: #FDF6EC;
+
+  --persona-pine: #047857;
+  --persona-pine-deep: #065F46;
+  --persona-pine-wash: #EBF4F0;
+
+  --persona-indigo: #4F46E5;   /* 纯色使用，禁止渐变 */
+  --persona-indigo-deep: #3730A3;
+  --persona-indigo-wash: #EFEFFA;
+
+  --persona-ochre: #9A3412;
+  --persona-ochre-deep: #7C2D12;
+  --persona-ochre-wash: #FAF0EA;
+
+  --persona-graphite: #44403C;
+  --persona-graphite-deep: #292524;
+  --persona-graphite-wash: #F0EFEE;
+
+  /* ---- 字体 ---- */
+  --font-display: "Smiley Sans", "Noto Sans SC", sans-serif;
+  --font-body: "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --text-xs: 12px;    /* 置信度小字 / 署名 / N5 提示行 */
+  --text-sm: 13px;    /* 证据来源行 */
+  --text-base: 15px;  /* 卡片正文 */
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;   /* 核心结论：≥卡宽 1/6，缩略图可读 */
+  --text-4xl: 44px;   /* 仅自我画像卡人格关键词 */
+
+  --weight-regular: 400;
+  --weight-medium: 510;
+  --weight-semibold: 590;
+
+  --leading-body: 1.6;
+  --leading-tight: 1.25;
+  --leading-display: 1.15;
+
+  --tracking-caps: 0.08em;
+  --tracking-display: -0.01em;
+
+  /* ---- 间距（4px 网格） ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;    /* 卡内区块间距 */
+  --space-8: 32px;    /* 卡内边距 */
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---- 圆角 ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;  /* 卡片上限 */
+  --radius-full: 9999px;
+
+  /* ---- 层级（印刷感：走边框不走阴影） ---- */
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 1px 2px rgba(28, 25, 23, 0.04), 0 4px 12px rgba(28, 25, 23, 0.06);
+
+  /* ---- 动效（M=2，仅状态过渡收敛值） ---- */
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- 分享卡版式 ---- */
+  --card-width: 750px;
+  --card-padding: 32px;
+  --card-block-gap: 24px;
+}
+
+/* 人格色系应用方式（分享卡）
+   每张画像卡派生一个人格色，用 [data-persona] 切换；
+   匹配卡组双人格色并置，但禁止做任何渐变过渡。 */
+[data-persona="amber"]    { --persona: var(--persona-amber);    --persona-deep: var(--persona-amber-deep);    --persona-wash: var(--persona-amber-wash); }
+[data-persona="pine"]     { --persona: var(--persona-pine);     --persona-deep: var(--persona-pine-deep);     --persona-wash: var(--persona-pine-wash); }
+[data-persona="indigo"]   { --persona: var(--persona-indigo);   --persona-deep: var(--persona-indigo-deep);   --persona-wash: var(--persona-indigo-wash); }
+[data-persona="ochre"]    { --persona: var(--persona-ochre);    --persona-deep: var(--persona-ochre-deep);    --persona-wash: var(--persona-ochre-wash); }
+[data-persona="graphite"] { --persona: var(--persona-graphite); --persona-deep: var(--persona-graphite-deep); --persona-wash: var(--persona-graphite-wash); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-fast: 0ms; --motion-base: 0ms; }
+}
