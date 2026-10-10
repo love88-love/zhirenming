@@ -1,7 +1,7 @@
 # 02 · 知彼推断引擎（线索录入 → 他人画像）
 
 > 进入条件：用户想分析某个具体的人（"分析某人/帮我看看TA/给TA建档"），或带回新证据回填。
-> 通用约束：语言规范以 UIUX §2 全文为强约束（短句 ≤25 字、置信度措辞三级映射、慎用词 ≤1 次、禁用词清单触碰即返工）；语气素材引用 COPY-LIB §2.2 为 few-shot；任何操控类请求跳转 ethics.md §2 拒答分支。
+> 通用约束：语言规范以 `references/docs/UIUX.md` §2 全文为强约束（短句 ≤25 字、置信度措辞三级映射、慎用词 ≤1 次、禁用词清单触碰即返工）；语气素材引用 `references/docs/COPY-LIB.md` §2.2 为 few-shot（下文"COPY-LIB"均指该文件）；任何操控类请求跳转 ethics.md §2 拒答分支。
 
 ---
 
@@ -47,7 +47,7 @@
 
 **4.2 线索 <3 条**（AC-02）：明示信息不足，拒绝生成完整画像；允许输出已有线索支撑的有限推断，但**全部标 low**、每条带可推翻性提示，并说明"再有一条具体线索，我就能把其中一个坐实或推翻"。
 
-**4.3 用户要求过度解读**：单条线索撑不起的深挖，拒答。基调："就凭这一条，我最多说到 XX。再往下就是算命了，我不干这个。"然后给正向出口（提示可观察的方向，或转补盲）。
+**4.3 用户要求过度解读**：单条线索撑不起的深挖，拒答。基调："就凭这一条，我最多说到 XX。理解你想再深挖，但抱歉，再往下就是算命了——没有证据的推断我不输出。"然后给正向出口（提示可观察的方向，或转补盲）。
 
 ---
 
@@ -57,7 +57,7 @@
 
 - 顶层必需 7 项：`schema_version`（"1.x"）/ `profile_id`（UUID）/ `profile_type` / `subject` / `dimensions` / `created_at` / `updated_at`（date-time）。
 - `dimensions` 固定五族：`big_five`（内含 openness / conscientiousness / extraversion / agreeableness / neuroticism 五个子维度）、`attachment`、`communication_style`、`lifestyle_rhythm`、`values`。每个维度是 `{ "assessments": [...] }`，允许空数组——**证据不足就留空，禁止编造**。
-- 每条 assessment 必需 6 项：`id`（`a_001` 起递增）/ `claim` / `confidence` / `evidence`（≥1 条）/ `status` / `created_at`；可选 `tendency`（high/medium/low/unclear）。
+- 每条 assessment 必需 6 项：`id`（`a_001` 起递增）/ `claim` / `confidence` / `evidence`（≥1 条）/ `status` / `created_at`；可选 `tendency`（high/medium/low/unclear）。attachment 维度的 assessment 可另带 `label`（secure/anxious/avoidant/disorganized，定不了型就不填），规则见 dimensions.md attachment 节。
 - 每条 evidence 必需 3 项：`quote`（用户原话，不得改写）/ `source`（user_report / user_observation / chat_record / self_report）/ `date`（YYYY-MM-DD）。
 - claim 写作遵守 dimensions.md §4 反巴纳姆规范：具体可证伪、含场景或频率锚点、禁"有时…有时…"两头堵。
 
@@ -89,7 +89,7 @@
 3. **校验**：写入后必跑 `python scripts/validate_profile.py <画像路径>`。
 4. **写回**：退出码 0 才视为落盘成功；**退出码 1/2 时带 stdout 里的逐字段错误回炉重写，且不得覆盖原文件**（AC-10）——先在临时位置修正，校验通过后再替换。回炉时对用户说的话：「画像写入时自检没通过，原文件我没动，数据没丢。我在修正格式问题，稍后重新生成一份给你核对。」
 
-校验通过后记录本地日志 `profile_validated`（失败记 `validation_failed`），只记事件名+时间+version+role_type，**禁记线索原文与画像内容**。
+校验通过后跑 `log_event.py profile_validated --role <对方role>`（失败记 `validation_failed`）；纪律见 SKILL.md §3 日志纪律，禁手记。
 
 ---
 
