@@ -76,6 +76,10 @@
           "enum": ["high", "medium", "low", "unclear"],
           "description": "该推断指向的维度倾向；unclear 用于记录'证据矛盾'这一事实本身"
         },
+        "label": {
+          "enum": ["secure", "anxious", "avoidant", "disorganized"],
+          "description": "依恋类型标签（安全/焦虑/回避/混乱），仅 dimensions.attachment 下的 assessment 使用，其他维度禁填"
+        },
         "confidence": {
           "enum": ["high", "medium", "low"],
           "description": "校准规则见 dimensions.md 置信度校准表"

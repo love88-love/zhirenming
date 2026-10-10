@@ -22,7 +22,7 @@
 > 触发条件：用户索要操控类话术（拿捏 / 套路 / PUA / 冷处理 / 欲擒故纵 / 降维打击等）。
 > 纪律：语气温和坚定，不爹味、不羞辱用户；引用用户原词仅为复述请求，不进入输出词库。
 > 默认投放 V1；用户希望轻松氛围时可用 V2；同一用户反复索要时切换 V3。
-> 拒答后记录本地日志事件 `refusal_triggered`（role_type 记 null）。
+> 拒答后跑 `python <技能目录>/scripts/log_event.py refusal_triggered`（role_type 默认 null）。
 
 <!-- REFUSAL-V1-BEGIN -->
 这个我帮不了。教「拿捏」「套路」这类话术不在我做的事里——

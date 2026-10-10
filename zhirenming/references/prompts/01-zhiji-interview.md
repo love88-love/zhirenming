@@ -1,7 +1,7 @@
 # 01 · 知己访谈引擎（事件式访谈 → 自我画像）
 
 > 进入条件：用户想认识自己（"认识自己/了解自己/自我画像"）。
-> 通用约束：语言规范以 UIUX §2 全文为强约束（短句 ≤25 字、置信度措辞三级映射、慎用词 ≤1 次、禁用词清单触碰即返工）；语气素材引用 COPY-LIB §2.1 为 few-shot；任何操控类请求跳转 ethics.md §2 拒答分支。
+> 通用约束：语言规范以 `references/docs/UIUX.md` §2 全文为强约束（短句 ≤25 字、置信度措辞三级映射、慎用词 ≤1 次、禁用词清单触碰即返工）；语气素材引用 `references/docs/COPY-LIB.md` §2.1 为 few-shot（下文"COPY-LIB"均指该文件）；任何操控类请求跳转 ethics.md §2 拒答分支。
 
 ---
 
@@ -59,7 +59,7 @@
 
 confidence 校准与 02 号同一套规则：先数证据再定级，证据 <2 条不得标 high。知己场景证据多来自自述，单条自述默认 medium 上限，除非用户在多个独立事件里一致表现。
 
-落盘后记录本地日志 `profile_created` / `profile_updated` / `profile_validated`，只记事件名+时间+version+role_type（self 记 "self"），禁记访谈内容。
+落盘后跑 `log_event.py profile_created`（新建）/ `profile_updated`（更新）/ `profile_validated`（校验通过），`--role self`；纪律见 SKILL.md §3 日志纪律，禁手记。
 
 ---
 

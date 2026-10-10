@@ -51,10 +51,14 @@ description: >-
 
 1. **读**：写前必读当前画像全文（`zhibi-data/profiles/self.json` 或 `<alias>.json`）；不存在则按 `references/schemas/profile.schema.json` 建骨架。
 2. **局部修改**：只更新目标维度的 assessments，禁止整文件重写式覆盖。
-3. **校验**：写入后必跑 `python scripts/validate_profile.py <画像路径>`。
+3. **校验**：写入后必跑 `python <技能目录>/scripts/validate_profile.py <画像路径>`。
 4. **写回**：退出码 0 才算落盘；校验失败带逐字段错误回炉重写，**不得覆盖原文件**（AC-10）。
 
-补盲缺口识别只跑 `scripts/gap_scan.py`，禁止自行扫描画像找缺口。运行日志写 `zhibi-data/usage-log.jsonl`，只记事件名+时间+version+role_type，禁记线索原文、claim、evidence、alias。触发点（v1.1，QA-A3）：会话首次进入本技能时记 `skill_triggered`；每次进入知己/知彼/补盲/匹配任一模块时记 `module_entered`（事件名+模块名+时间，字段口径同上）。
+**路径基准**：`scripts/` 在技能安装目录下，不在用户工作区——运行脚本必须用技能目录的绝对路径（用户级安装为 `C:\Users\<用户名>\.workbuddy\skills\zhirenming\scripts\`，以本会话技能加载时给出的 base directory 为准）；画像与日志路径 `zhibi-data/` 才相对于当前工作区。两个基准不得混用。
+
+补盲缺口识别只跑 `<技能目录>/scripts/gap_scan.py`，禁止自行扫描画像找缺口。
+
+**日志纪律（v1.2 起机器化）**：运行日志一律跑 `python <技能目录>/scripts/log_event.py <事件名> [--role <role_type>] [--module <模块>]`，追加写入 `zhibi-data/usage-log.jsonl`；事件名枚举写死在脚本里（skill_triggered / module_entered / refusal_triggered / profile_created / profile_updated / profile_validated / validation_failed / gap_scan_run / match_rejected_to_gap / match_generated），不在枚举内会被拒。**禁止手写或编辑该日志文件**——脚本只接受事件名与枚举参数，线索原文、claim、evidence、alias 在机制上写不进去。触发点：会话首次进入本技能记 `skill_triggered`；每次进入知己/知彼/补盲/匹配任一模块记 `module_entered --module zhiji|zhibi|bubuang|pipei`。
 
 ## §4 压实保真清单（上下文压缩时必须保住）
 
@@ -79,3 +83,7 @@ description: >-
 | `references/theory/communication.md` | 涉及沟通与冲突模式时 |
 | `references/theory/mbti-display.md` | 用户要 MBTI 说法时（仅展示层，不作推断依据） |
 | `references/PRIVACY-TEMPLATE.md` | 首次运行生成 PRIVACY.md 时 |
+| `references/docs/COPY-LIB.md` | 各模块 few-shot 示例与文案库（prompts 中"COPY-LIB §x.x"即指此文件） |
+| `references/docs/UIUX.md` | 语言规范 §2 / 幽默红线 §2.3 的完整来源（prompts 中"UIUX §x"即指此文件） |
+| `references/docs/SPEC.md` | 产品规格（§1.5 三理念、§3 锁定条款的出处，按需查阅） |
+| `references/docs/DETAIL-DESIGN.md` | 详细设计（脚本行为契约 §5.1/§5.2 的出处，改脚本前必读） |

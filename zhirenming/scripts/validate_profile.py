@@ -46,6 +46,7 @@ EVIDENCE_REQUIRED = ["quote", "source", "date"]
 ENUM_PROFILE_TYPE = {"self", "other"}
 ENUM_ROLE = {"friend", "colleague", "leader", "romantic", "family", "other"}
 ENUM_TENDENCY = {"high", "medium", "low", "unclear"}
+ENUM_LABEL = {"secure", "anxious", "avoidant", "disorganized"}
 ENUM_CONFIDENCE = {"high", "medium", "low"}
 ENUM_SOURCE = {"user_report", "user_observation", "chat_record", "self_report"}
 ENUM_STATUS = {"active", "revised"}
@@ -188,6 +189,13 @@ def _validate_assessment(item, a_path, err):
     if "tendency" in item and item["tendency"] not in ENUM_TENDENCY:
         err(a_path + ".tendency", "%r not in enum %s"
             % (item["tendency"], sorted(ENUM_TENDENCY)))
+    if "label" in item:
+        if item["label"] not in ENUM_LABEL:
+            err(a_path + ".label", "%r not in enum %s"
+                % (item["label"], sorted(ENUM_LABEL)))
+        elif not a_path.startswith("dimensions.attachment."):
+            err(a_path + ".label",
+                "label 仅允许出现在 dimensions.attachment 下")
     if "confidence" in item and item["confidence"] not in ENUM_CONFIDENCE:
         err(a_path + ".confidence", "%r not in enum %s"
             % (item["confidence"], sorted(ENUM_CONFIDENCE)))
@@ -219,6 +227,32 @@ def _validate_assessment(item, a_path, err):
                 % (ev["source"], sorted(ENUM_SOURCE)))
         if "date" in ev and not _is_date(ev["date"]):
             err(e_path + ".date", "must be date format YYYY-MM-DD")
+
+
+def _label_placement_errors(data):
+    """label 位置校验（两种校验器共用）：attachment 以外的维度禁填 label。
+
+    jsonschema 路径只查枚举，位置限制由本函数补齐，保证 fallback 与
+    jsonschema 两种模式结论一致。
+    """
+    errors = []
+    if not isinstance(data, dict):
+        return errors
+    for dim_path, dim_val in _iter_dimension_slots(data.get("dimensions")):
+        if dim_path.startswith("dimensions.attachment"):
+            continue
+        if not isinstance(dim_val, dict):
+            continue
+        assessments = dim_val.get("assessments")
+        if not isinstance(assessments, list):
+            continue
+        for idx, item in enumerate(assessments):
+            if isinstance(item, dict) and "label" in item:
+                errors.append({
+                    "path": "%s.assessments[%d].label" % (dim_path, idx),
+                    "message": "label 仅允许出现在 dimensions.attachment 下",
+                })
+    return errors
 
 
 def jsonschema_validate(data, schema):
@@ -332,6 +366,7 @@ def main():
             _fatal("schema load failed: %s" % exc, file_name)
         print("校验器：jsonschema（Draft7 + FormatChecker）", file=sys.stderr)
         errors = jsonschema_validate(data, schema)
+        errors += _label_placement_errors(data)
         payload = {"valid": not errors, "file": file_name, "errors": errors}
     else:
         print("校验器：内置 fallback（未检测到 jsonschema）", file=sys.stderr)

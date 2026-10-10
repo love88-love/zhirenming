@@ -77,6 +77,8 @@
 
 依恋判断证据门槛高，默认 confidence 上限 medium，除非有直接行为观察（theory/attachment.md）。
 
+**label 字段（v1.2 起）**：attachment 维度的 assessment 可带 `label` 结构化标签，枚举 `secure`（安全型）/ `anxious`（焦虑型）/ `avoidant`（回避型）/ `disorganized`（混乱型），供匹配模块机器读取；证据不足定不了型就不填 label（可用 tendency=unclear 记录摆荡事实）。label 仅 attachment 可用，其他维度填了校验会报错。
+
 ### communication_style 沟通风格
 
 | 倾向 | 可观察行为锚点 | 典型证据形态 |
