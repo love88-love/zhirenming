@@ -48,7 +48,8 @@ ENUM_ROLE = {"friend", "colleague", "leader", "romantic", "family", "other"}
 ENUM_TENDENCY = {"high", "medium", "low", "unclear"}
 ENUM_LABEL = {"secure", "anxious", "avoidant", "disorganized"}
 ENUM_CONFIDENCE = {"high", "medium", "low"}
-ENUM_SOURCE = {"user_report", "user_observation", "chat_record", "self_report"}
+ENUM_SOURCE = {"user_report", "user_observation", "chat_record", "self_report",
+               "memory_archive", "self_reflection"}
 ENUM_STATUS = {"active", "revised"}
 
 RE_SCHEMA_VERSION = re.compile(r"^1\.")
@@ -274,10 +275,12 @@ def jsonschema_validate(data, schema):
 
 
 def strict_warnings(data):
-    """--strict 软校验（v1.1，QA-A1）：AC-15 的机器级兜底告警
+    """--strict 软校验（v1.1，QA-A1；v1.3 追加 memory_archive 规则）
 
-    规则（对齐 02 号 prompt §3）：active 推断 confidence=high 时，
+    规则一（对齐 02 号 prompt §3）：active 推断 confidence=high 时，
     须满足「证据 ≥2 条」或「含 1 条 user_observation 直接行为观察」。
+    规则二（v1.3，对齐 SKILL.md §0.5）：active 推断 confidence=high 时，
+    证据中不得含 memory_archive（记忆档案为二手转述，上限 medium）。
     违反只产生告警，不影响 valid 与退出码——定级裁量仍在 prompt 层。
     """
     warnings = []
@@ -308,6 +311,17 @@ def strict_warnings(data):
                     "path": "%s.assessments[%d]" % (dim_path, idx),
                     "message": "confidence=high but evidence<2 and no "
                                "user_observation (AC-15 soft check)",
+                })
+            has_memory_archive = any(
+                isinstance(ev, dict) and ev.get("source") == "memory_archive"
+                for ev in evidence
+            )
+            if has_memory_archive:
+                warnings.append({
+                    "path": "%s.assessments[%d]" % (dim_path, idx),
+                    "message": "confidence=high but evidence contains "
+                               "memory_archive (SKILL.md §0.5: 记忆档案证据 "
+                               "上限 medium)",
                 })
     return warnings
 

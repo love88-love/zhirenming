@@ -25,6 +25,25 @@
 
 ---
 
+## 2.1 材料入口（三种入料方式，按用户给什么接什么）
+
+**分支一 · 叙述式**：用户口语讲共同经历、转述相处细节。按 §2 常规流程录入，`source` 标 `user_report` / `user_observation`（用户亲眼所见的行为才用后者）。
+
+**分支二 · 粘贴式**：用户直接粘贴聊天记录、朋友圈/动态截图的转文字、长段相处记录（含对话中途不打招呼直接粘贴的情况——这就是入口，不要反问"你想干什么"）。处理流程：
+
+1. 先做**证据抽取**：逐条拆解材料，标注说话人、时间、具体行为，把"材料原文"和"我的推断"分开；
+2. 聊天原文证据 `source` 标 `chat_record`，`quote` 引用原文不得改写；
+3. 抽取完先向用户复述关键线索清单（"我从记录里读到这 5 条，你看有没有漏的"），确认后再进推断；
+4. 材料一次给很多时，分批处理，每批结束跑一次 gap_scan 更新缺口。
+
+**分支三 · 本机直读（可选增强，非必备）**：用户在本机、希望直接从微信聊天记录提取线索时——
+
+1. 该能力依赖用户自装的 `wechat-wcdb-local-extract` 技能，**本技能不内置**。未安装时告知："有一个可以读取本机微信记录的辅助技能，装了我就能直接帮你提取，省得手抄。要不要装？"用户同意再引导安装，不同意就回落分支一/二，不纠缠。
+2. **授权铁律**：确认用户明确授权后才可执行读取——必须同时满足「用户本人操作自己设备」+「用户当场明说同意读取与某人的聊天记录」。授权话术示例："我接下来会读取你本机上和 TA 的聊天记录作为分析素材，只在你本地处理，不外传。确认读吗？"
+3. 提取的证据 `source` 标 `chat_record`；涉及第三方隐私内容只进本地画像，交付/展示时脱敏，化名纪律不变。
+
+---
+
 ## 3. 置信度校准规则（先数证据再定级，禁止先拍级再找补）
 
 每条推断定 confidence 前，先数它手里有几条证据、证据是什么成色：
@@ -58,7 +77,7 @@
 - 顶层必需 7 项：`schema_version`（"1.x"）/ `profile_id`（UUID）/ `profile_type` / `subject` / `dimensions` / `created_at` / `updated_at`（date-time）。
 - `dimensions` 固定五族：`big_five`（内含 openness / conscientiousness / extraversion / agreeableness / neuroticism 五个子维度）、`attachment`、`communication_style`、`lifestyle_rhythm`、`values`。每个维度是 `{ "assessments": [...] }`，允许空数组——**证据不足就留空，禁止编造**。
 - 每条 assessment 必需 6 项：`id`（`a_001` 起递增）/ `claim` / `confidence` / `evidence`（≥1 条）/ `status` / `created_at`；可选 `tendency`（high/medium/low/unclear）。attachment 维度的 assessment 可另带 `label`（secure/anxious/avoidant/disorganized，定不了型就不填），规则见 dimensions.md attachment 节。
-- 每条 evidence 必需 3 项：`quote`（用户原话，不得改写）/ `source`（user_report / user_observation / chat_record / self_report）/ `date`（YYYY-MM-DD）。
+- 每条 evidence 必需 3 项：`quote`（用户原话，不得改写）/ `source`（user_report / user_observation / chat_record / self_report / memory_archive / self_reflection——后两个：memory_archive 仅 self.json 启动建档用且禁标 high，self_reflection 仅 03 号感受回采用）/ `date`（YYYY-MM-DD）。
 - claim 写作遵守 dimensions.md §4 反巴纳姆规范：具体可证伪、含场景或频率锚点、禁"有时…有时…"两头堵。
 
 **完整 assessment 示例（照此形状写）：**

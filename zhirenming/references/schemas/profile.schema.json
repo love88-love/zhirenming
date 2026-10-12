@@ -92,7 +92,7 @@
             "required": ["quote", "source", "date"],
             "properties": {
               "quote": { "type": "string", "description": "用户原话或事件描述原文，不得改写" },
-              "source": { "enum": ["user_report", "user_observation", "chat_record", "self_report"] },
+              "source": { "enum": ["user_report", "user_observation", "chat_record", "self_report", "memory_archive", "self_reflection"], "description": "memory_archive=设备记忆档案读取（confidence 上限 medium，禁标 high）；self_reflection=补盲感受回采（用户对自身感受/反应的自述）" },
               "date": { "type": "string", "format": "date" }
             }
           }
