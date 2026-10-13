@@ -1,7 +1,7 @@
 # 知人明 zhirenming
 
 > 知人者智，自知者明。
-> 一个帮你把零散线索变成「有依据的理解」的 AI 观察型朋友——WorkBuddy 技能包。
+> 一个帮你把零散线索变成「有依据的理解」的 AI 观察型朋友——标准 SKILL.md 格式的通用 Agent 技能包。
 
 大多数人不缺识人的智商，缺的是一套方法：要么凭感觉给人贴标签，要么被星座血型糊弄。知人明做的事只有一件：**每条判断都挂在证据上，证据不足就明说不足**。
 
@@ -46,19 +46,24 @@
 - [知彼 · 线索录入 → 画像 + 补盲清单](examples/02-zhibi-inference-demo.md)
 - [匹配 · 双画像对比 → 相处参考（含拒答示范）](examples/03-pipei-match-demo.md)
 
-## 安装（WorkBuddy）
+## 安装
 
-把整个 `zhirenming/` 目录复制到 WorkBuddy 用户级技能目录：
+本技能是标准 SKILL.md 格式，适用于支持该格式的各类 Agent 平台。把整个 `zhirenming/` 目录复制到你所用平台的个人技能目录：
+
+| 平台 | 技能目录 |
+|------|----------|
+| WorkBuddy | `~/.workbuddy/skills/zhirenming` |
+| Claude Code | `~/.claude/skills/zhirenming` |
+| Codex CLI | `~/.codex/skills/zhirenming` |
 
 ```bash
-# Windows (Git Bash)
-cp -r zhirenming ~/.workbuddy/skills/zhirenming
-
-# macOS / Linux
-cp -r zhirenming ~/.workbuddy/skills/zhirenming
+# 以 Claude Code 为例（macOS / Linux / Windows Git Bash 通用，其他平台替换目标路径即可）
+cp -r zhirenming ~/.claude/skills/zhirenming
 ```
 
-新开会话，说「我想认识自己」或「帮我分析一个人」即可触发。
+新开会话，说「我想认识自己」或「帮我分析一个人」即可触发；部分平台也支持显式调用（如 Claude Code 的 `/zhirenming`、Codex 的 `$zhirenming`）。
+
+无技能机制的平台（如豆包智能体、DeepSeek API）：把 `SKILL.md` 全文作为智能体人设或系统提示词使用，功能相同、机器校验降级。各平台的安装路径、记忆锚点、限制与降级策略见 [zhirenming/references/docs/PORTING.md](zhirenming/references/docs/PORTING.md)。
 
 **可选依赖**：脚本优先使用 `jsonschema`（缺失时自动降级为内置校验器，功能不受影响）：
 
@@ -71,7 +76,7 @@ pip install jsonschema   # 可选，Python 3.10+
 ## 仓库结构
 
 ```
-├── zhirenming/              # 技能包本体（WorkBuddy 加载的就是这个目录）
+├── zhirenming/              # 技能包本体（各 Agent 平台加载的就是这个目录）
 │   ├── SKILL.md             # 技能入口：触发词、路由、全局硬约束
 │   ├── INSTALL.md           # 安装与卸载说明
 │   ├── references/          # 按需加载的领域知识（Progressive Disclosure）
@@ -114,7 +119,7 @@ python zhirenming/scripts/gap_scan.py <画像路径> --format json
 
 ## 版本
 
-当前 **v1.1**（2026-10-09）——见 [CHANGELOG.md](CHANGELOG.md)。
+当前 **v1.4**（2026-10-13）——见 [CHANGELOG.md](CHANGELOG.md)。
 v1.0 经两轮测试签发：验收标准 15/15 通过，P0/P1 缺陷为零；安全审计 P2（零外发、零密钥、零网络行为）。
 
 ## License
